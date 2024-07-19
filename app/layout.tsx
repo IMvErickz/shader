@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { SignInHeader } from "@/components/sign-in/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Shader",
   description: "Shader is your favorite stock manager",
+  icons: '/favicon.ico',
 };
 
 export default function RootLayout({
@@ -16,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} size-full flex flex-col bg-zinc-800`}>
+        <SignInHeader />
+        <main className="flex flex-col items-center justify-center">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
