@@ -18,6 +18,10 @@ export default function SignIn() {
                         </Button>
                     </div>
                 </form>
+                <div className="flex flex-col items-center justify-center mt-6 gap-y-2">
+                    <span className="text-white text-sm underline">Esqueci minha senha</span>
+                    <span className="text-white text-sm underline">Não tem conta? cadastre-se aqui</span>
+                </div>
             </section>
         </main>
     )
