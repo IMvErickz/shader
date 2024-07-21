@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SignInHeader } from "@/components/sign-in/header";
+import { ConditionalLayout } from "@/components/layout/conditional-layout";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} size-full flex flex-col bg-zinc-800`}>
-        <SignInHeader />
+        <ConditionalLayout />
+        <Toaster richColors />
         <main className="flex flex-col items-center justify-center">
           {children}
         </main>
