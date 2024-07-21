@@ -10,6 +10,7 @@ import { api } from "@/lib/axios";
 import ReactLoading from 'react-loading';
 import { setCookie } from 'nookies'
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const authSchema = z.object({
     email: z.string().email(),
@@ -33,20 +34,24 @@ export function SignInForm() {
     async function handleAuth(data: AuthType) {
         const { email, password } = data
 
-        const response = await api.post<AuthResponseProps>('/auth', {
-            email,
-            password
-        })
+        try {
+            const response = await api.post<AuthResponseProps>('/auth', {
+                email,
+                password
+            })
 
-        setCookie(null, '@token', response.data.access_token, {
-            maxAge: 7 * 24 * 60 * 60
-        })
+            setCookie(null, '@token', response.data.access_token, {
+                maxAge: 7 * 24 * 60 * 60
+            })
 
-        setCookie(null, '@user_id', response.data.user_id, {
-            maxAge: 7 * 24 * 60 * 60
-        })
+            setCookie(null, '@user_id', response.data.user_id, {
+                maxAge: 7 * 24 * 60 * 60
+            })
 
-        router.push('/')
+            router.push('/')
+        } catch (err) {
+            toast.error('Algo de errado aconteceu, tente novamente')
+        }
 
     }
 
