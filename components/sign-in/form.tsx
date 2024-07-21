@@ -8,6 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@/lib/axios";
 import ReactLoading from 'react-loading';
+import { setCookie } from 'nookies'
 
 const authSchema = z.object({
     email: z.string().email(),
@@ -15,6 +16,11 @@ const authSchema = z.object({
 })
 
 type AuthType = z.infer<typeof authSchema>
+
+interface AuthResponseProps {
+    access_token: string
+    user_id: string
+}
 
 export function SignInForm() {
     const { control, handleSubmit, formState: { isSubmitting, isValid } } = useForm<AuthType>({
@@ -24,9 +30,17 @@ export function SignInForm() {
     async function handleAuth(data: AuthType) {
         const { email, password } = data
 
-        await api.post('/auth', {
+        const response = await api.post<AuthResponseProps>('/auth', {
             email,
             password
+        })
+
+        setCookie(null, '@token', response.data.access_token, {
+            maxAge: 7 * 24 * 60 * 60
+        })
+
+        setCookie(null, '@user_id', response.data.user_id, {
+            maxAge: 7 * 24 * 60 * 60
         })
     }
 
