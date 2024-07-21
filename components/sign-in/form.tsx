@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@/lib/axios";
 import ReactLoading from 'react-loading';
 import { setCookie } from 'nookies'
+import { useRouter } from "next/navigation";
 
 const authSchema = z.object({
     email: z.string().email(),
@@ -27,6 +28,8 @@ export function SignInForm() {
         resolver: zodResolver(authSchema)
     })
 
+    const router = useRouter()
+
     async function handleAuth(data: AuthType) {
         const { email, password } = data
 
@@ -42,6 +45,9 @@ export function SignInForm() {
         setCookie(null, '@user_id', response.data.user_id, {
             maxAge: 7 * 24 * 60 * 60
         })
+
+        router.push('/')
+
     }
 
     return (
