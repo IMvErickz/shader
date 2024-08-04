@@ -17,7 +17,7 @@ export const ConditionalLayout = () => {
     }
     return (
         <>
-            {(pathname === "/sign-in" ? <SignInHeader /> : (<Header />))}
+            {(pathname === "/sign-in" || pathname === "/sign-up" ? <SignInHeader /> : (<Header />))}
         </>
     )
 };
