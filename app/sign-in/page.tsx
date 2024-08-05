@@ -1,4 +1,5 @@
 import { SignInForm } from "@/components/sign-in/form";
+import Link from "next/link";
 
 export default function SignIn() {
     return (
@@ -8,7 +9,7 @@ export default function SignIn() {
                 <SignInForm />
                 <div className="flex flex-col items-center justify-center mt-6 gap-y-2">
                     <span className="text-white text-sm underline">Esqueci minha senha</span>
-                    <span className="text-white text-sm underline">Não tem conta? cadastre-se aqui</span>
+                    <Link href='/sign-up' className="text-white text-sm underline">Não tem conta? cadastre-se aqui</Link>
                 </div>
             </section>
         </main>
