@@ -1,23 +1,24 @@
 'use client'
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { SignInHeader } from '../sign-in/header';
 import { Header } from '../header';
 import { parseCookies } from 'nookies';
-import { useRouter } from 'next/navigation';
 
 export const ConditionalLayout = () => {
     const pathname = usePathname();
-    const router = useRouter()
+    const router = useRouter();
 
-    const cookies = parseCookies()
+    const cookies = parseCookies();
+    const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
 
-    if (!cookies['@token']) {
-        router.replace('/sign-in')
+    if (!cookies['@token'] && !isAuthPage) {
+        router.replace('/sign-in');
     }
+
     return (
         <>
-            {(pathname === "/sign-in" || pathname === "/sign-up" ? <SignInHeader /> : (<Header />))}
+            {isAuthPage ? <SignInHeader /> : <Header />}
         </>
-    )
+    );
 };
