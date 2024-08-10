@@ -11,6 +11,8 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-separator": "^1.1.0",
     "axios": "^1.7.2",
     "chart.js": "^4.4.3",
     "lucide-react": "^0.411.0",
