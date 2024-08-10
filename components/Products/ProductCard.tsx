@@ -1,3 +1,5 @@
+import { EditProductPopover } from "./EditProductPopover"
+
 export function ProductCard() {
     function formatPrice(value: number) {
         return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
@@ -5,7 +7,10 @@ export function ProductCard() {
 
     return (
         <div className="h-72 w-64 flex flex-col border border-zinc-500 border-solid rounded-lg">
-            <div className=" rounded-t-md w-[254.4px] h-32 flex justify-center">
+            <div className="rounded-t-md w-[254.4px] h-32 flex justify-center">
+                <div className="ml-48 mt-2 absolute">
+                    <EditProductPopover />
+                </div>
                 <img className="w-[100%] rounded-t-md object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsbGKrcB6pF1xOCTCEjoBSxVp9pUIDM8UBuQ&s" alt="" />
             </div>
             <div className="size-full flex flex-col items-center justify-center">
