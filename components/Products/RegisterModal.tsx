@@ -3,8 +3,27 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '../button';
 import { Image, Plus, X } from 'lucide-react';
 import { Input } from '../input';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const formData = z.object({
+   name: z.string(),
+   price: z.number(),
+   quantity: z.number() 
+})
+
+type ProductFormData = z.infer<typeof formData>
 
 export function RegisterModal() {
+    const {control, handleSubmit} = useForm<ProductFormData>({
+        resolver: zodResolver(formData)
+    })
+
+    async function handleCreateProduct(data: ProductFormData){
+        console.log(data)
+    }
+
     return (
         <Dialog.Root>
             <Dialog.Trigger asChild>
@@ -23,25 +42,59 @@ export function RegisterModal() {
                         Cadastrar Produto
                     </Dialog.Title>
                     <section>
-                    <form action="" className='mt-8 flex'>
+                    <form onSubmit={handleSubmit(handleCreateProduct)} className='mt-8 flex'>
                         <div className='w-full flex flex-col'>
                             <fieldset className="mb-[15px] flex flex-col items-center gap-5">
                                 <label className="text-white text-xl" htmlFor="name">
                                     Nome
                                 </label>
-                                <Input id='name' />
+                                <Controller
+                                    control={control}
+                                    name='name'
+                                    render={({field}) => {
+                                        return(
+                                            <Input 
+                                            id='name' 
+                                            {...field}/>
+                                        )
+                                    }}
+                                />
                             </fieldset>
                             <fieldset className="mb-[15px] flex flex-col items-center justify-center gap-5">
-                                <label className="text-white text-xl" htmlFor="username">
+                                <label className="text-white text-xl" htmlFor="price">
                                     Preço
                                 </label>
-                                <Input id='username' />
+                                <Controller
+                                    control={control}
+                                    name='price'
+                                    render={({field}) => {
+                                        return(
+                                            <Input 
+                                            type='number' 
+                                            id='price' 
+                                            {...field} 
+                                            onChange={(event => field.onChange(Number(event.target.value)))}/>
+                                        )
+                                    }}
+                                />
                             </fieldset>
                             <fieldset className="mb-[15px] flex flex-col items-center gap-5">
                                 <label className="text-white text-xl" htmlFor="quantity">
                                     Quantidade
                                 </label>
-                                <Input id='quantity' />
+                                <Controller
+                                    control={control}
+                                    name='quantity'
+                                    render={({field}) => {
+                                        return(
+                                            <Input 
+                                            type='number' 
+                                            id='quantity' 
+                                            {...field} 
+                                            onChange={(event => field.onChange(Number(event.target.value)))}/>
+                                        )
+                                    }}
+                                />
                             </fieldset>
                         </div>
                         <div className="mt-[25px] w-full flex flex-col items-center justify-center">
@@ -52,11 +105,9 @@ export function RegisterModal() {
                                     Adicionar foto
                                 </Button>
                             </fieldset>
-                            <Dialog.Close asChild>
-                                <Button className='w-28'>
+                            <Button className='w-28' type='submit'>
                                     Cadastrar
-                                </Button>
-                            </Dialog.Close>
+                            </Button>
                         </div>
                     </form>
                     </section>
