@@ -1,5 +1,5 @@
 import { LineChart } from '@/components/dashboard/line-chart'
-import { PieChart } from '@/components/dashboard/pie-chat'
+import { PieChartComponent } from '@/components/dashboard/pie-chat'
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
             <LineChart />
           </div>
           <div className="w-80">
-            <PieChart />
+            <PieChartComponent />
           </div>
         </div>
       </section>
