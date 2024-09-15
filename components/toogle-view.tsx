@@ -3,23 +3,20 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import { AlignJustify, LayoutGrid } from 'lucide-react'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function ToogleView() {
   const [view, setView] = useState('grid')
-  console.log(view)
 
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
-  const params = useMemo(() => {
-    return new URLSearchParams(searchParams)
-  }, [searchParams])
 
   useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString())
     params.set('view', view)
     router.replace(`${pathname}?${params.toString()}`)
-  }, [view, params, pathname, router])
+  }, [view, pathname, router, searchParams])
 
   const toggleGroupItemClasses =
     'hover:bg-violet3 bg-transparent text-white data-[state=on]:bg-zinc-950 data-[state=on]:text-white flex h-[35px] w-[35px] items-center justify-center text-base leading-4 first:rounded-l last:rounded-r'
