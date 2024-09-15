@@ -2,21 +2,16 @@
 
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 import { AlignJustify, LayoutGrid } from 'lucide-react'
-import { useSearchParams, useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export function ToogleView() {
   const [view, setView] = useState('grid')
-
-  const searchParams = useSearchParams()
   const router = useRouter()
-  const pathname = usePathname()
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('view', view)
-    router.replace(`${pathname}?${params.toString()}`)
-  }, [view, pathname, router, searchParams])
+    router.replace(`/products?view=${view}`)
+  }, [view, router])
 
   const toggleGroupItemClasses =
     'hover:bg-violet3 bg-transparent text-white data-[state=on]:bg-zinc-950 data-[state=on]:text-white flex h-[35px] w-[35px] items-center justify-center text-base leading-4 first:rounded-l last:rounded-r'
