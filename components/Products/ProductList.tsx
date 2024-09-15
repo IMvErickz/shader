@@ -1,6 +1,6 @@
 import { EditProductPopover } from './EditProductPopover'
 
-export function ProductCard() {
+export function ProductList() {
   function formatPrice(value: number) {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -9,11 +9,11 @@ export function ProductCard() {
   }
 
   return (
-    <div className="h-48 w-64 flex flex-col border border-zinc-500 border-solid rounded-lg">
-      <div className="ml-48 mt-2 absolute">
+    <div className="h-max w-full flex flex-col border border-zinc-500 border-solid rounded-lg">
+      <div className="w-full flex items-center justify-end p-4">
         <EditProductPopover />
       </div>
-      <div className="size-full flex flex-col items-center justify-center">
+      <div className="size-full flex flex-col items-center justify-center py-4">
         <span className="text-white text-xl">Nome do produto</span>
         <span className="text-white text-xl font-semibold">
           {formatPrice(30)}

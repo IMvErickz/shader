@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '../button'
-import { Image as LucidImageIcon, Plus, X } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
 import { Input } from '../input'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -46,7 +46,7 @@ export function RegisterModal() {
           <section>
             <form
               onSubmit={handleSubmit(handleCreateProduct)}
-              className="mt-8 flex"
+              className="mt-8 flex flex-col"
             >
               <div className="w-full flex flex-col">
                 <fieldset className="mb-[15px] flex flex-col items-center gap-5">
@@ -105,16 +105,6 @@ export function RegisterModal() {
                 </fieldset>
               </div>
               <div className="mt-[25px] w-full flex flex-col items-center justify-center">
-                <fieldset className="mb-[15px] flex flex-col items-center justify-center gap-5">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsbGKrcB6pF1xOCTCEjoBSxVp9pUIDM8UBuQ&s"
-                    alt=""
-                  />
-                  <Button className="flex gap-x-3 w-72">
-                    <LucidImageIcon />
-                    Adicionar foto
-                  </Button>
-                </fieldset>
                 <Button className="w-28" type="submit">
                   Cadastrar
                 </Button>
