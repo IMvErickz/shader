@@ -6,11 +6,14 @@ import { Input } from '../input'
 import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { CategorySelect } from './category-select'
 
 const formData = z.object({
   name: z.string(),
   price: z.number(),
   quantity: z.number(),
+  type: z.string(),
+  category: z.string(),
 })
 
 type ProductFormData = z.infer<typeof formData>
@@ -48,61 +51,69 @@ export function RegisterModal() {
               onSubmit={handleSubmit(handleCreateProduct)}
               className="mt-8 flex flex-col"
             >
-              <div className="w-full flex flex-col">
-                <fieldset className="mb-[15px] flex flex-col items-center gap-5">
-                  <label className="text-white text-xl" htmlFor="name">
-                    Nome
-                  </label>
-                  <Controller
-                    control={control}
-                    name="name"
-                    render={({ field }) => {
-                      return <Input id="name" {...field} />
-                    }}
-                  />
-                </fieldset>
-                <fieldset className="mb-[15px] flex flex-col items-center justify-center gap-5">
-                  <label className="text-white text-xl" htmlFor="price">
-                    Preço
-                  </label>
-                  <Controller
-                    control={control}
-                    name="price"
-                    render={({ field }) => {
-                      return (
-                        <Input
-                          type="number"
-                          id="price"
-                          {...field}
-                          onChange={(event) =>
-                            field.onChange(Number(event.target.value))
-                          }
-                        />
-                      )
-                    }}
-                  />
-                </fieldset>
-                <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+              <div className="w-full flex items-center justify-center gap-x-4">
+                <div className="w-full flex flex-col">
+                  <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+                    <label className="text-white text-xl" htmlFor="name">
+                      Nome
+                    </label>
+                    <Controller
+                      control={control}
+                      name="name"
+                      render={({ field }) => {
+                        return <Input id="name" {...field} />
+                      }}
+                    />
+                  </fieldset>
+                  <fieldset className="mb-[15px] flex flex-col items-center justify-center gap-5">
+                    <label className="text-white text-xl" htmlFor="price">
+                      Preço
+                    </label>
+                    <Controller
+                      control={control}
+                      name="price"
+                      render={({ field }) => {
+                        return (
+                          <Input
+                            type="number"
+                            id="price"
+                            {...field}
+                            onChange={(event) =>
+                              field.onChange(Number(event.target.value))
+                            }
+                          />
+                        )
+                      }}
+                    />
+                  </fieldset>
+                  <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+                    <label className="text-white text-xl" htmlFor="quantity">
+                      Quantidade
+                    </label>
+                    <Controller
+                      control={control}
+                      name="quantity"
+                      render={({ field }) => {
+                        return (
+                          <Input
+                            type="number"
+                            id="quantity"
+                            {...field}
+                            onChange={(event) =>
+                              field.onChange(Number(event.target.value))
+                            }
+                          />
+                        )
+                      }}
+                    />
+                  </fieldset>
+                </div>
+                <div className="w-full flex flex-col">
                   <label className="text-white text-xl" htmlFor="quantity">
-                    Quantidade
+                    Tipo
                   </label>
-                  <Controller
-                    control={control}
-                    name="quantity"
-                    render={({ field }) => {
-                      return (
-                        <Input
-                          type="number"
-                          id="quantity"
-                          {...field}
-                          onChange={(event) =>
-                            field.onChange(Number(event.target.value))
-                          }
-                        />
-                      )
-                    }}
-                  />
-                </fieldset>
+                  <CategorySelect />
+                </div>
               </div>
               <div className="mt-[25px] w-full flex flex-col items-center justify-center">
                 <Button className="w-28" type="submit">
