@@ -1,12 +1,10 @@
-import React from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '../button'
 import { Plus, X } from 'lucide-react'
-import { Input } from '../input'
-import { Controller, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CategorySelect } from './category-select'
+import { ProductForm } from './ProductForm'
 
 const formData = z.object({
   name: z.string(),
@@ -16,16 +14,15 @@ const formData = z.object({
   category: z.string(),
 })
 
-type ProductFormData = z.infer<typeof formData>
+export type ProductFormData = z.infer<typeof formData>
 
 export function RegisterModal() {
-  const { control, handleSubmit } = useForm<ProductFormData>({
+  const form = useForm<ProductFormData>({
     resolver: zodResolver(formData),
+    defaultValues: {
+      category: 'oi',
+    },
   })
-
-  async function handleCreateProduct(data: ProductFormData) {
-    console.log(data)
-  }
 
   return (
     <Dialog.Root>
@@ -46,82 +43,11 @@ export function RegisterModal() {
           <Dialog.Title className="text-white m-0 text-2xl font-medium">
             Cadastrar Produto
           </Dialog.Title>
-          <section>
-            <form
-              onSubmit={handleSubmit(handleCreateProduct)}
-              className="mt-8 flex flex-col"
-            >
-              <div className="w-full flex items-center justify-center gap-x-4">
-                <div className="w-full flex flex-col">
-                  <fieldset className="mb-[15px] flex flex-col items-center gap-5">
-                    <label className="text-white text-xl" htmlFor="name">
-                      Nome
-                    </label>
-                    <Controller
-                      control={control}
-                      name="name"
-                      render={({ field }) => {
-                        return <Input id="name" {...field} />
-                      }}
-                    />
-                  </fieldset>
-                  <fieldset className="mb-[15px] flex flex-col items-center justify-center gap-5">
-                    <label className="text-white text-xl" htmlFor="price">
-                      Preço
-                    </label>
-                    <Controller
-                      control={control}
-                      name="price"
-                      render={({ field }) => {
-                        return (
-                          <Input
-                            type="number"
-                            id="price"
-                            {...field}
-                            onChange={(event) =>
-                              field.onChange(Number(event.target.value))
-                            }
-                          />
-                        )
-                      }}
-                    />
-                  </fieldset>
-                  <fieldset className="mb-[15px] flex flex-col items-center gap-5">
-                    <label className="text-white text-xl" htmlFor="quantity">
-                      Quantidade
-                    </label>
-                    <Controller
-                      control={control}
-                      name="quantity"
-                      render={({ field }) => {
-                        return (
-                          <Input
-                            type="number"
-                            id="quantity"
-                            {...field}
-                            onChange={(event) =>
-                              field.onChange(Number(event.target.value))
-                            }
-                          />
-                        )
-                      }}
-                    />
-                  </fieldset>
-                </div>
-                <div className="w-full flex flex-col">
-                  <label className="text-white text-xl" htmlFor="quantity">
-                    Tipo
-                  </label>
-                  <CategorySelect />
-                </div>
-              </div>
-              <div className="mt-[25px] w-full flex flex-col items-center justify-center">
-                <Button className="w-28" type="submit">
-                  Cadastrar
-                </Button>
-              </div>
-            </form>
-          </section>
+          <FormProvider {...form}>
+            <section>
+              <ProductForm />
+            </section>
+          </FormProvider>
           <Dialog.Close asChild>
             <button
               className="text-violet11 hover:bg-violet4 focus:shadow-violet7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"

@@ -3,20 +3,20 @@ import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { ProductFormData } from './RegisterModal'
 
-export function CategorySelect() {
-  const [category, setCategory] = useState('')
-  const [label, setLabel] = useState('Selecione a Categoria')
+export function TypeMeasureSelect() {
+  const [measure, setMeasure] = useState('')
+  const [label, setLabel] = useState('Selecione a unidade de medida')
 
   const { setValue } = useFormContext<ProductFormData>()
 
-  function handleChangeCategory(value: string, label: string) {
-    setCategory(value)
+  function handleChangeMeasure(value: string, label: string) {
+    setMeasure(value)
     setLabel(label)
   }
 
   useEffect(() => {
-    setValue('category', category)
-  }, [category, setValue])
+    setValue('type', measure)
+  }, [measure, setValue])
 
   return (
     <Popover.Root>
@@ -36,23 +36,23 @@ export function CategorySelect() {
           <div className="w-full flex flex-col gap-y-2 mb-2">
             <button
               className="size-full flex justify-center gap-x-2 text-white"
-              onClick={() => handleChangeCategory('food', 'Alimentos')}
+              onClick={() => handleChangeMeasure('unity', 'Unidade')}
             >
-              Alimentos
+              Unidade
             </button>
 
             <button
               className="size-full flex justify-center gap-x-2 text-white"
-              onClick={() => handleChangeCategory('drink', 'Bebida')}
+              onClick={() => handleChangeMeasure('weight', 'Peso')}
             >
-              Bebida
+              Peso
             </button>
 
             <button
               className="size-full flex justify-center gap-x-2 text-white"
-              onClick={() => handleChangeCategory('cleaning', 'Limpeza')}
+              onClick={() => handleChangeMeasure('liter', 'Litro')}
             >
-              Limpeza
+              Litro
             </button>
           </div>
           <Popover.Arrow className="fill-zinc-800" />
