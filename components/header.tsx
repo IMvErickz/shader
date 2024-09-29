@@ -1,20 +1,22 @@
 import { Logo } from '@/public/icons/Logo'
-import { NavLink } from './nav-link'
 import { usePathname } from 'next/navigation'
 import { RegisterModal } from './Products/RegisterModal'
+import { NavHeader } from './nav-header'
+import { ProfileSelect } from './profile-select'
 
 export function Header() {
   const path = usePathname()
 
   return (
-    <header className="w-full h-20 border-b-2 flex items-center justify-between border-b-zinc-500 border-b-solid px-4 gap-x-4">
-      <Logo />
-      <nav className="w-full h-full items-center flex gap-x-8">
-        <NavLink href="/">Dashboard</NavLink>
-
-        <NavLink href="/products">Products</NavLink>
-      </nav>
-      <div className="w-56">{path === '/products' && <RegisterModal />}</div>
+    <header className="w-full h-max border-b-2 flex flex-col items-center justify-between border-b-zinc-500 border-b-solid py-2 px-4 gap-4">
+      <div className="w-full flex items-center justify-start">
+        <Logo />
+        <ProfileSelect label="Erick" />
+      </div>
+      <div className="w-full flex items-center justify-between">
+        <NavHeader />
+        <div className="w-56">{path === '/products' && <RegisterModal />}</div>
+      </div>
     </header>
   )
 }
