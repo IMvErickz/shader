@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ConditionalLayout } from '@/components/layout/conditional-layout'
 import { Toaster } from 'sonner'
+import { GeneralProviders } from '@/providers/general-providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,11 +23,13 @@ export default function RootLayout({
       <body
         className={`${inter.className} size-full flex flex-col bg-zinc-800`}
       >
-        <ConditionalLayout />
-        <Toaster richColors />
-        <main className="flex flex-col items-center justify-center">
-          {children}
-        </main>
+        <GeneralProviders>
+          <ConditionalLayout />
+          <Toaster richColors />
+          <main className="flex flex-col items-center justify-center">
+            {children}
+          </main>
+        </GeneralProviders>
       </body>
     </html>
   )

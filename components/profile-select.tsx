@@ -1,13 +1,12 @@
 import * as Popover from '@radix-ui/react-popover'
-import { MoveVertical, Plus } from 'lucide-react'
+import { MoveVertical } from 'lucide-react'
+import { ProfileSelectContent } from './profile-select-content'
 
 interface ProfileSelectProps {
   label: string
 }
 
 export function ProfileSelect({ label }: ProfileSelectProps) {
-  const arr: string[] = ['Fenix']
-
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -28,35 +27,7 @@ export function ProfileSelect({ label }: ProfileSelectProps) {
             <h4 className="text-white tex-xl font-semibold">Suas empresas</h4>
           </div>
           <div className="w-full h-0.5 bg-zinc-500 my-2"></div>
-          <div className="w-full flex flex-col gap-y-2 mb-2">
-            {arr.length === 0 ? (
-              <div className="w-full flex items-center justify-center">
-                <span className="text-white text-xl text-center font-semibold">
-                  Você ainda não tem empresas cadastradas
-                </span>
-              </div>
-            ) : (
-              <div>
-                {arr.map((e) => {
-                  return (
-                    <button
-                      key={e}
-                      className="size-full flex justify-center gap-x-2 text-white"
-                    >
-                      {e}
-                    </button>
-                  )
-                })}
-              </div>
-            )}
-
-            <div className="w-full h-0.5 bg-zinc-500 my-2"></div>
-
-            <button className="size-full flex items-center justify-center gap-x-2 text-white">
-              <Plus className="size-4" />
-              Cadastrar empresa
-            </button>
-          </div>
+          <ProfileSelectContent />
           <Popover.Arrow className="fill-zinc-800" />
         </Popover.Content>
       </Popover.Portal>
