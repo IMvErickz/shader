@@ -7,7 +7,7 @@ export default function Home() {
       <section className="size-full flex flex-col items-center">
         <div className="w-full flex items-center">
           <h1 className="text-white text-3xl font-semibold">
-            Produtos Mais Vendidos
+            Produtos Mais Vendidos!
           </h1>
         </div>
         <div className="size-full flex items-center justify-center gap-x-8">
