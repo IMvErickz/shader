@@ -22,6 +22,7 @@ type AuthType = z.infer<typeof authSchema>
 interface AuthResponseProps {
   access_token: string
   user_id: string
+  name: string
 }
 
 export function SignInForm() {
@@ -50,6 +51,14 @@ export function SignInForm() {
       })
 
       setCookie(null, '@user_id', response.data.user_id, {
+        maxAge: 7 * 24 * 60 * 60,
+      })
+
+      setCookie(null, '@token', response.data.access_token, {
+        maxAge: 7 * 24 * 60 * 60,
+      })
+
+      setCookie(null, '@username', response.data.name, {
         maxAge: 7 * 24 * 60 * 60,
       })
 

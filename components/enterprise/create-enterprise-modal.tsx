@@ -24,6 +24,7 @@ export function CreateEnterpriseModal() {
 
   const cookies = parseCookies()
   const userId = cookies['@user_id']
+  const username = cookies['@username']
 
   const { mutateAsync: createEnterpriseMutate } = useMutation({
     mutationFn: createEnterprise,
@@ -34,7 +35,12 @@ export function CreateEnterpriseModal() {
       if (cache) {
         queryClient.setQueryData<EnterpriseResponse[]>(key, [
           ...cache,
-          { id: '', name, created_at: '' },
+          {
+            id: '',
+            name,
+            created_at: '',
+            members: [{ user: { name: username } }],
+          },
         ])
         return { cache }
       }

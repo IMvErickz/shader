@@ -1,5 +1,4 @@
-import { LineChart } from '@/components/dashboard/line-chart'
-import { PieChartComponent } from '@/components/dashboard/pie-chat'
+import { EntepriseListSection } from '@/components/enterprise-page/enterprise-list-section'
 
 export default function Home() {
   return (
@@ -7,17 +6,12 @@ export default function Home() {
       <section className="size-full flex flex-col items-center">
         <div className="w-full flex items-center">
           <h1 className="text-white text-3xl font-semibold">
-            Produtos Mais Vendidos!
+            Empresas Cadastradas
           </h1>
         </div>
-        <div className="size-full flex items-center justify-center gap-x-8">
-          <div className="w-full">
-            <LineChart />
-          </div>
-          <div className="w-80">
-            <PieChartComponent />
-          </div>
-        </div>
+        <section className="size-full flex items-center justify-center py-16">
+          <EntepriseListSection />
+        </section>
       </section>
     </main>
   )
