@@ -9,7 +9,7 @@ export function EntepriseListSection() {
   const cookies = parseCookies()
   const userId = cookies['@user_id']
 
-  const { data, isLoading } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ['enteprise-list', userId],
     queryFn: () => getEnterprises({ userId }),
   })
@@ -18,39 +18,39 @@ export function EntepriseListSection() {
     return null
   }
 
-  if (isLoading) {
-    return (
-      <div className="size full grid grid-flow-row grid-cols-4 gap-12">
-        {Array.from({ length: 10 })?.map(() => {
+  return (
+    <div className="size full grid grid-flow-row grid-cols-4 gap-12">
+      {isFetching &&
+        Array.from({ length: 12 })?.map(() => {
           return (
             <EnterpriseCard
-              isLoading={isLoading}
+              isLoading={isFetching}
+              id={'enterprise.id'}
               key={'enterprise.id'}
               name={'enterprise.name'}
               ownerName={'enterprise.members[0].user.name'}
             />
           )
         })}
-      </div>
-    )
-  }
-
-  return data.length > 0 ? (
-    <div className="size full grid grid-flow-row grid-cols-4 gap-12">
-      {data?.map((enterprise) => {
-        return (
-          <EnterpriseCard
-            isLoading={isLoading}
-            key={enterprise.id}
-            name={enterprise.name}
-            ownerName={enterprise.members[0].user.name}
-          />
-        )
-      })}
-    </div>
-  ) : (
-    <div className="size-full flex items-center justify-center">
-      <span className="text-white text-5xl">Nenhuma empresa cadastrada</span>
+      {data.length > 0 ? (
+        data?.map((enterprise) => {
+          return (
+            <EnterpriseCard
+              isLoading={isFetching}
+              key={enterprise.id}
+              id={enterprise.id}
+              name={enterprise.name}
+              ownerName={enterprise.members[0].user.name}
+            />
+          )
+        })
+      ) : (
+        <div className="size-full flex items-center justify-center col-span-4 row-span-full">
+          <span className="text-white text-5xl">
+            Nenhuma empresa cadastrada
+          </span>
+        </div>
+      )}
     </div>
   )
 }

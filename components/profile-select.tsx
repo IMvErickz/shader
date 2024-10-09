@@ -1,3 +1,5 @@
+'use client'
+
 import * as Popover from '@radix-ui/react-popover'
 import { MoveVertical } from 'lucide-react'
 import { ProfileSelectContent } from './profile-select-content'
@@ -9,14 +11,12 @@ interface ProfileSelectProps {
 export function ProfileSelect({ label }: ProfileSelectProps) {
   return (
     <Popover.Root>
-      <Popover.Trigger asChild>
-        <button
-          className="rounded-lg w-44 h-12 cursor-pointer bg-transparent inline-flex items-center justify-center text-white outline-none gap-4"
-          aria-label="Update dimensions"
-        >
-          {label}
-          <MoveVertical className="size-4" />
-        </button>
+      <Popover.Trigger
+        className="rounded-lg w-44 h-12 cursor-pointer bg-transparent inline-flex items-center justify-center text-white outline-none gap-4"
+        aria-label="Update dimensions"
+      >
+        {label}
+        <MoveVertical className="size-4" />
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
