@@ -2,7 +2,6 @@
 
 import { useForm, Controller } from 'react-hook-form'
 import { Button } from '../button'
-import { Input } from '../input'
 import { InputPassword } from '../inputPassword'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,6 +10,7 @@ import ReactLoading from 'react-loading'
 import { setCookie } from 'nookies'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { input } from '@/theme/components/input'
 
 const authSchema = z.object({
   email: z.string().email(),
@@ -26,6 +26,7 @@ interface AuthResponseProps {
 
 export function SignInForm() {
   const {
+    register,
     control,
     handleSubmit,
     formState: { isSubmitting, isValid },
@@ -64,12 +65,11 @@ export function SignInForm() {
       className="w-[445px] flex flex-col"
     >
       <div className="w-full flex flex-col gap-y-4 mt-12">
-        <Controller
-          control={control}
-          name="email"
-          render={({ field }) => {
-            return <Input type="text" placeholder="Email" {...field} />
-          }}
+        <input
+          type="email"
+          className={input({ default: 'primary' })}
+          placeholder="E-mail"
+          {...register('email')}
         />
 
         <Controller
@@ -88,6 +88,7 @@ export function SignInForm() {
               color="#ffff"
               height={'5%'}
               width={'5%'}
+              className="flex items-center justify-center"
             />
           ) : (
             'Entrar'
