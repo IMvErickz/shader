@@ -15,7 +15,7 @@ export function TypeMeasureSelect() {
   }
 
   useEffect(() => {
-    setValue('type', measure)
+    setValue('measure', measure)
   }, [measure, setValue])
 
   return (

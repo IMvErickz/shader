@@ -41,7 +41,7 @@ export function Header() {
       </div>
       <div className="w-full flex items-center justify-between">
         <NavHeader />
-        <div className="w-56">{path === '/products' && <RegisterModal />}</div>
+        <div className="w-56">{enterprisePath && <RegisterModal />}</div>
       </div>
     </header>
   )

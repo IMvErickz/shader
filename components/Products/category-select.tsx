@@ -2,6 +2,8 @@ import * as Popover from '@radix-ui/react-popover'
 import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { ProductFormData } from './RegisterModal'
+import { useQuery } from '@tanstack/react-query'
+import { getCategory } from '@/api/category/get-category'
 
 export function CategorySelect() {
   const [category, setCategory] = useState('')
@@ -14,8 +16,13 @@ export function CategorySelect() {
     setLabel(label)
   }
 
+  const { data } = useQuery({
+    queryKey: ['product-category'],
+    queryFn: getCategory,
+  })
+
   useEffect(() => {
-    setValue('category', category)
+    setValue('categoryId', category)
   }, [category, setValue])
 
   return (
@@ -34,26 +41,19 @@ export function CategorySelect() {
           sideOffset={5}
         >
           <div className="w-full flex flex-col gap-y-2 mb-2">
-            <button
-              className="size-full flex justify-center gap-x-2 text-white"
-              onClick={() => handleChangeCategory('food', 'Alimentos')}
-            >
-              Alimentos
-            </button>
-
-            <button
-              className="size-full flex justify-center gap-x-2 text-white"
-              onClick={() => handleChangeCategory('drink', 'Bebida')}
-            >
-              Bebida
-            </button>
-
-            <button
-              className="size-full flex justify-center gap-x-2 text-white"
-              onClick={() => handleChangeCategory('cleaning', 'Limpeza')}
-            >
-              Limpeza
-            </button>
+            {data?.map((category) => {
+              return (
+                <button
+                  key={category.id}
+                  className="size-full flex justify-center gap-x-2 text-white"
+                  onClick={() =>
+                    handleChangeCategory(category.id, category.name)
+                  }
+                >
+                  {category.name}
+                </button>
+              )
+            })}
           </div>
           <Popover.Arrow className="fill-zinc-800" />
         </Popover.Content>

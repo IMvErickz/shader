@@ -10,8 +10,8 @@ const formData = z.object({
   name: z.string(),
   price: z.number(),
   quantity: z.number(),
-  type: z.string(),
-  category: z.string(),
+  measure: z.string(),
+  categoryId: z.string(),
 })
 
 export type ProductFormData = z.infer<typeof formData>
@@ -19,9 +19,6 @@ export type ProductFormData = z.infer<typeof formData>
 export function RegisterModal() {
   const form = useForm<ProductFormData>({
     resolver: zodResolver(formData),
-    defaultValues: {
-      category: 'oi',
-    },
   })
 
   return (

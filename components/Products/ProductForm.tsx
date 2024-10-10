@@ -5,14 +5,34 @@ import { Input } from '../input'
 import { ProductFormData } from './RegisterModal'
 import { TypeMeasureSelect } from './type-measure-select'
 import { CategorySelect } from './category-select'
+import { useParams } from 'next/navigation'
+import { createProduct } from '@/api/product/create-product'
+import { toast } from 'sonner'
 
 export function ProductForm() {
   const { control, handleSubmit, watch } = useFormContext<ProductFormData>()
 
-  const productMeasureType = watch('type')
+  const params = useParams()
+  const entepriseId = String(params.id)
+
+  const productMeasureType = watch('measure')
 
   async function handleCreateProduct(data: ProductFormData) {
-    console.log(data)
+    const { categoryId, measure, name, quantity } = data
+
+    try {
+      await createProduct({
+        entepriseId,
+        categoryId,
+        name,
+        quantity,
+        measure,
+      })
+
+      toast.success('Produto cadastrado com sucesso')
+    } catch (err) {
+      toast.error('Algo de errado aconteceu')
+    }
   }
 
   return (
