@@ -4,6 +4,7 @@ import { getEnterprises } from '@/api/enterprise/get-enterprises'
 import { useQuery } from '@tanstack/react-query'
 import { parseCookies } from 'nookies'
 import { CreateEnterpriseModal } from './enterprise/create-enterprise-modal'
+import Link from 'next/link'
 
 export function ProfileSelectContent() {
   const cookies = parseCookies()
@@ -30,12 +31,13 @@ export function ProfileSelectContent() {
         <div className="w-full flex flex-col items-center justify-start px-2">
           {data.map((enteprise) => {
             return (
-              <button
+              <Link
                 key={enteprise.id}
                 className="size-full flex justify-start gap-x-2 text-white"
+                href={`/enterprise/dashboard/${enteprise.id}`}
               >
                 {enteprise.name}
-              </button>
+              </Link>
             )
           })}
         </div>
