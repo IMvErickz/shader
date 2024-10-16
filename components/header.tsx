@@ -9,6 +9,7 @@ import { parseCookies } from 'nookies'
 import { useQuery } from '@tanstack/react-query'
 import { getEnterpriseById } from '@/api/enterprise/get-enterprise-by-id'
 import Link from 'next/link'
+import { PopoverProfile } from './popover-profile'
 
 export function Header() {
   const path = usePathname()
@@ -27,17 +28,22 @@ export function Header() {
 
   return (
     <header className="w-full h-max border-b-2 flex flex-col items-center justify-between border-b-zinc-500 border-b-solid py-2 px-4 gap-4">
-      <div className="w-full flex items-center justify-start">
-        <Link href="/">
-          <Logo />
-        </Link>
-        {userName && <ProfileSelect label={userName} />}
-        {enterprisePath && (
-          <div className="flex items-center justify-center gap-4">
-            <span className="text-white text-base">/</span>
-            <span className="text-white text-base">{data?.name}</span>
-          </div>
-        )}
+      <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-start">
+          <Link href="/">
+            <Logo />
+          </Link>
+          {userName && <ProfileSelect label={userName} />}
+          {enterprisePath && (
+            <div className="flex items-center justify-center gap-4">
+              <span className="text-white text-base">/</span>
+              <span className="text-white text-base">{data?.name}</span>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center justify-center">
+          <PopoverProfile />
+        </div>
       </div>
       <div className="w-full flex items-center justify-between">
         <NavHeader />

@@ -9,7 +9,7 @@ export function EntepriseListSection() {
   const cookies = parseCookies()
   const userId = cookies['@user_id']
 
-  const { data, isFetching } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['enteprise-list', userId],
     queryFn: () => getEnterprises({ userId }),
   })
@@ -20,11 +20,11 @@ export function EntepriseListSection() {
 
   return (
     <div className="size full grid grid-flow-row grid-cols-4 gap-12">
-      {isFetching &&
+      {isLoading &&
         Array.from({ length: 12 })?.map(() => {
           return (
             <EnterpriseCard
-              isLoading={isFetching}
+              isLoading={isLoading}
               id={'enterprise.id'}
               key={'enterprise.id'}
               name={'enterprise.name'}
@@ -36,7 +36,7 @@ export function EntepriseListSection() {
         data?.map((enterprise) => {
           return (
             <EnterpriseCard
-              isLoading={isFetching}
+              isLoading={isLoading}
               key={enterprise.id}
               id={enterprise.id}
               name={enterprise.name}
