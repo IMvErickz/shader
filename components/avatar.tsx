@@ -3,11 +3,11 @@ import { parseCookies } from 'nookies'
 
 export function Avatar() {
   const cookies = parseCookies()
-  const userName = cookies['@username']
+  const userName = String(cookies['@username'])
 
   const separateUsername = userName.split(' ')
-  const firstNameSeparate = separateUsername[0]
-  const lastNameSeparate = separateUsername[1]
+  const firstNameSeparate = String(separateUsername[0])
+  const lastNameSeparate = String(separateUsername[1])
   const firstName = firstNameSeparate.substring(0, 1)
   const lastName = lastNameSeparate.substring(0, 1)
   const concatName = firstName.concat(lastName)
