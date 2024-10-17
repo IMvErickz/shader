@@ -1,4 +1,5 @@
 import { api } from '@/lib/axios'
+import { getToken } from '../get-token'
 
 interface CreateProductProps {
   entepriseId: string
@@ -15,10 +16,20 @@ export async function createProduct({
   name,
   quantity,
 }: CreateProductProps) {
-  await api.post(`/product/${entepriseId}`, {
-    name,
-    measure,
-    quantity,
-    categoryId,
-  })
+  const token = getToken()
+
+  await api.post(
+    `/product/${entepriseId}`,
+    {
+      name,
+      measure,
+      quantity,
+      categoryId,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  )
 }

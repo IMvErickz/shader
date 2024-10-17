@@ -2,8 +2,20 @@ import * as Popover from '@radix-ui/react-popover'
 import { Avatar } from './avatar'
 import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
+import { destroyCookie } from 'nookies'
+import { useRouter } from 'next/navigation'
 
 export function PopoverProfile() {
+  const router = useRouter()
+
+  function logout() {
+    destroyCookie(undefined, '@token')
+    destroyCookie(undefined, '@user_id')
+    destroyCookie(undefined, '@username')
+
+    router.replace('/sign-in')
+  }
+
   return (
     <Popover.Root>
       <Popover.Trigger
@@ -38,7 +50,10 @@ export function PopoverProfile() {
               Configurações
             </button>
 
-            <button className="text-red-500 flex items-center justify-start">
+            <button
+              onClick={logout}
+              className="text-red-500 flex items-center justify-start"
+            >
               Sair
             </button>
           </div>

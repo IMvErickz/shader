@@ -24,6 +24,7 @@ export function Header() {
   const { data } = useQuery({
     queryKey: ['enteprise', enterpriseId],
     queryFn: () => getEnterpriseById({ id: enterpriseId }),
+    enabled: enterprisePath,
   })
 
   return (
