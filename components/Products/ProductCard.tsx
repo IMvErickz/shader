@@ -6,9 +6,10 @@ interface ProductCardProps {
   name: string
   quantity: string
   measure: string
+  id: string
 }
 
-export function ProductCard({ name, quantity, measure }: ProductCardProps) {
+export function ProductCard({ name, quantity, measure, id }: ProductCardProps) {
   const [measureType, setMeasureType] = useState('')
 
   function formatPrice(value: number) {
@@ -33,7 +34,7 @@ export function ProductCard({ name, quantity, measure }: ProductCardProps) {
   return (
     <div className="h-48 w-64 flex flex-col border border-zinc-500 border-solid rounded-lg">
       <div className="ml-48 mt-2 absolute">
-        <EditProductPopover />
+        <EditProductPopover productId={id} />
       </div>
       <div className="size-full flex flex-col items-center justify-center">
         <span className="text-white text-xl">{name}</span>

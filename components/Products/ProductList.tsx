@@ -6,9 +6,10 @@ interface ProductListProps {
   name: string
   quantity: string
   measure: string
+  id: string
 }
 
-export function ProductList({ measure, name, quantity }: ProductListProps) {
+export function ProductList({ measure, name, quantity, id }: ProductListProps) {
   const [measureType, setMeasureType] = useState('')
 
   function formatPrice(value: number) {
@@ -33,7 +34,7 @@ export function ProductList({ measure, name, quantity }: ProductListProps) {
   return (
     <div className="h-max w-full flex flex-col border border-zinc-500 border-solid rounded-lg">
       <div className="w-full flex items-center justify-end p-4">
-        <EditProductPopover />
+        <EditProductPopover productId={id} />
       </div>
       <div className="size-full flex flex-col items-center justify-center py-4">
         <span className="text-white text-xl">{name}</span>
