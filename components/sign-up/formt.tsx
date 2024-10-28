@@ -54,7 +54,7 @@ export function SingUpForm() {
     const { email, name, password } = data
 
     try {
-      await api.post('/user/create', {
+      await api.post('/user', {
         email,
         name,
         password,
