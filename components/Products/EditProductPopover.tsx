@@ -2,8 +2,13 @@ import React from 'react'
 import * as Popover from '@radix-ui/react-popover'
 import * as Separator from '@radix-ui/react-separator'
 import { Ellipsis, Pencil, Copy, Trash2 } from 'lucide-react'
+import { RegisterWriteOffModal } from './RegisterWriteOffModal'
 
-export function EditProductPopover() {
+interface EditProductPopover {
+  productId: string
+}
+
+export function EditProductPopover({ productId }: EditProductPopover) {
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -16,23 +21,27 @@ export function EditProductPopover() {
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
-          className="rounded w-32 bg-zinc-800 border-2 border-zinc-700 border-solid shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
+          className="rounded w-56 bg-zinc-800 border-2 border-zinc-700 border-solid shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
           sideOffset={5}
         >
           <div className="w-full flex flex-col gap-y-2 mb-2">
-            <p className="text-white text-lg font-medium mb-2.5">Opções</p>
+            <div className="flex items-center p-2">
+              <p className="text-white text-lg font-medium mb-2.5">Opções</p>
+            </div>
             <Separator.Root className="bg-slate-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px" />
-            <button className="size-full flex justify-center gap-x-2 text-white">
+            <RegisterWriteOffModal id={productId} />
+            <Separator.Root className="bg-slate-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px" />
+            <button className="size-full items-center flex justify-center gap-x-2 text-white px-4">
               <Pencil className="w-4" />
               Editar
             </button>
             <Separator.Root className="bg-slate-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px" />
-            <button className="size-full flex justify-center gap-x-2 text-white">
+            <button className="size-full items-center flex justify-center gap-x-2 text-white px-4">
               <Copy className="w-4" />
               Duplicar
             </button>
             <Separator.Root className="bg-slate-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px" />
-            <button className="size-full flex justify-center gap-x-2 text-red-500">
+            <button className="size-full items-center flex justify-center gap-x-2 text-red-500 px-4">
               <Trash2 className="w-4" />
               Excluir
             </button>

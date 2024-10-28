@@ -25,6 +25,7 @@ export function ShowProductSection() {
             return (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 quantity={String(product.quantity)}
                 measure={product.measure}
@@ -38,6 +39,7 @@ export function ShowProductSection() {
             return (
               <ProductList
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 quantity={String(product.quantity)}
                 measure={product.measure}
