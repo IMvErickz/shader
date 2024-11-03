@@ -4,6 +4,7 @@ import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { destroyCookie } from 'nookies'
 import { useRouter } from 'next/navigation'
+import { CreateEnterpriseModal } from './enterprise/create-enterprise-modal'
 
 export function PopoverProfile() {
   const router = useRouter()
@@ -43,9 +44,11 @@ export function PopoverProfile() {
             >
               Perfil
             </Link>
-            <button className="text-white flex items-center justify-start">
-              Criar empresa
-            </button>
+            <CreateEnterpriseModal>
+              <button className="text-white flex items-center justify-start">
+                Criar empresa
+              </button>
+            </CreateEnterpriseModal>
             <button className="text-white flex items-center justify-start">
               Configurações
             </button>

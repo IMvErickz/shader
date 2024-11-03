@@ -8,21 +8,61 @@ import { CategorySelect } from './category-select'
 import { useParams } from 'next/navigation'
 import { createProduct } from '@/api/product/create-product'
 import { toast } from 'sonner'
+import { useMutation } from '@tanstack/react-query'
+import { queryClient } from '@/lib/query-client'
+import { ProductResponse } from '@/@types/product/product-response'
 
 export function ProductForm() {
   const { control, handleSubmit, watch } = useFormContext<ProductFormData>()
 
   const params = useParams()
-  const entepriseId = String(params.id)
+  const enterpriseId = String(params.id)
 
   const productMeasureType = watch('measure')
+
+  const productsQueryKey = ['products', enterpriseId]
+
+  const { mutateAsync: createProductMutate } = useMutation({
+    mutationFn: createProduct,
+    onSuccess: ({
+      productCategoryId,
+      enterpriseId,
+      measure,
+      name,
+      quantity,
+      userId,
+      id,
+      created_at: createdAt,
+    }) => {
+      const productsCached =
+        queryClient.getQueryData<ProductResponse[]>(productsQueryKey)
+
+      const addProductInCache: ProductResponse = {
+        created_at: createdAt,
+        enterpriseId,
+        measure,
+        name,
+        quantity,
+        id,
+        productCategoryId,
+        userId,
+      }
+
+      if (productsCached) {
+        return queryClient.setQueryData<ProductResponse[]>(productsQueryKey, [
+          ...productsCached,
+          addProductInCache,
+        ])
+      }
+    },
+  })
 
   async function handleCreateProduct(data: ProductFormData) {
     const { categoryId, measure, name, quantity } = data
 
     try {
-      await createProduct({
-        entepriseId,
+      await createProductMutate({
+        enterpriseId,
         categoryId,
         name,
         quantity,

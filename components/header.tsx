@@ -10,6 +10,8 @@ import { useQuery } from '@tanstack/react-query'
 import { getEnterpriseById } from '@/api/enterprise/get-enterprise-by-id'
 import Link from 'next/link'
 import { PopoverProfile } from './popover-profile'
+import { Button } from './button'
+import { Plus } from 'lucide-react'
 
 export function Header() {
   const path = usePathname()
@@ -48,7 +50,16 @@ export function Header() {
       </div>
       <div className="w-full flex items-center justify-between">
         <NavHeader />
-        <div className="w-56">{enterprisePath && <RegisterModal />}</div>
+        <div className="w-56">
+          {enterprisePath && (
+            <RegisterModal>
+              <Button className="flex items-center justify-center text-sm gap-x-2">
+                <Plus />
+                Cadastrar produto
+              </Button>
+            </RegisterModal>
+          )}
+        </div>
       </div>
     </header>
   )

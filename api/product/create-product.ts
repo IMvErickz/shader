@@ -1,25 +1,30 @@
 import { api } from '@/lib/axios'
 import { getToken } from '../get-token'
+import { ProductResponse } from '@/@types/product/product-response'
 
 interface CreateProductProps {
-  entepriseId: string
+  enterpriseId: string
   name: string
   quantity: number
   measure: string
   categoryId: string
 }
 
+interface CreateProductResponse {
+  product: ProductResponse
+}
+
 export async function createProduct({
   categoryId,
-  entepriseId,
+  enterpriseId,
   measure,
   name,
   quantity,
 }: CreateProductProps) {
   const token = getToken()
 
-  await api.post(
-    `/product/${entepriseId}`,
+  const response = await api.post<CreateProductResponse>(
+    `/product/${enterpriseId}`,
     {
       name,
       measure,
@@ -32,4 +37,6 @@ export async function createProduct({
       },
     },
   )
+
+  return response.data.product
 }

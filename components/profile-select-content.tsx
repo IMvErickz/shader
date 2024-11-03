@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { parseCookies } from 'nookies'
 import { CreateEnterpriseModal } from './enterprise/create-enterprise-modal'
 import Link from 'next/link'
+import { Plus } from 'lucide-react'
 
 export function ProfileSelectContent() {
   const cookies = parseCookies()
@@ -45,7 +46,12 @@ export function ProfileSelectContent() {
 
       <div className="w-full h-0.5 bg-zinc-500 my-2"></div>
 
-      <CreateEnterpriseModal />
+      <CreateEnterpriseModal>
+        <button className="size-full flex items-center justify-center gap-x-2 text-white">
+          <Plus className="size-4" />
+          Cadastrar empresa
+        </button>
+      </CreateEnterpriseModal>
     </div>
   )
 }

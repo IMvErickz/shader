@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { Plus, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -10,6 +10,11 @@ import { useMutation } from '@tanstack/react-query'
 import { parseCookies } from 'nookies'
 import { queryClient } from '@/lib/query-client'
 import { EnterpriseResponse } from '@/@types/enterprise/enterprise-response'
+import { ReactNode } from 'react'
+
+interface CreateEnterpriseModalProps {
+  children: ReactNode
+}
 
 const enterpriseSchema = z.object({
   name: z.string(),
@@ -17,7 +22,9 @@ const enterpriseSchema = z.object({
 
 type EnterpriseData = z.infer<typeof enterpriseSchema>
 
-export function CreateEnterpriseModal() {
+export function CreateEnterpriseModal({
+  children,
+}: CreateEnterpriseModalProps) {
   const { register, handleSubmit } = useForm<EnterpriseData>({
     resolver: zodResolver(enterpriseSchema),
   })
@@ -59,12 +66,7 @@ export function CreateEnterpriseModal() {
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild>
-        <button className="size-full flex items-center justify-center gap-x-2 text-white">
-          <Plus className="size-4" />
-          Cadastrar empresa
-        </button>
-      </Dialog.Trigger>
+      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
         <Dialog.Content

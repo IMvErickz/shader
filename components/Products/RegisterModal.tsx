@@ -1,10 +1,14 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { Button } from '../button'
-import { Plus, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductForm } from './ProductForm'
+import { ReactNode } from 'react'
+
+interface RegisterModalProps {
+  children: ReactNode
+}
 
 const formData = z.object({
   name: z.string(),
@@ -16,19 +20,14 @@ const formData = z.object({
 
 export type ProductFormData = z.infer<typeof formData>
 
-export function RegisterModal() {
+export function RegisterModal({ children }: RegisterModalProps) {
   const form = useForm<ProductFormData>({
     resolver: zodResolver(formData),
   })
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild>
-        <Button className="flex items-center justify-center text-sm gap-x-2">
-          <Plus />
-          Cadastrar produto
-        </Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
         <Dialog.Content
