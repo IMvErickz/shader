@@ -29,6 +29,10 @@ export function NavHeader() {
           <NavLink href={`/enterprise/products/${enterpriseId}`}>
             Produtos
           </NavLink>
+
+          <NavLink href={`/enterprise/settings/${enterpriseId}`}>
+            Configurações
+          </NavLink>
         </>
       )}
     </nav>
