@@ -17,7 +17,11 @@ export function CategoryList() {
   return (
     <div className="size-full border border-solid border-zinc-500 p-2 rounded-lg">
       {data && data.length < 1 ? (
-        <span>Não há categorias cadastradas</span>
+        <div className="size-full flex items-center justify-center">
+          <span className="text-white text-xl">
+            Não há categorias cadastradas
+          </span>
+        </div>
       ) : (
         data?.map((category) => {
           return (
