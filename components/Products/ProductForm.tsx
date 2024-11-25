@@ -32,7 +32,9 @@ export function ProductForm() {
       quantity,
       userId,
       id,
+      price,
       created_at: createdAt,
+      category,
     }) => {
       const productsCached =
         queryClient.getQueryData<ProductResponse[]>(productsQueryKey)
@@ -46,19 +48,21 @@ export function ProductForm() {
         id,
         productCategoryId,
         userId,
+        price,
+        category,
       }
 
       if (productsCached) {
-        return queryClient.setQueryData<ProductResponse[]>(productsQueryKey, [
-          ...productsCached,
-          addProductInCache,
-        ])
+        return queryClient.setQueryData<Omit<ProductResponse, 'category'>[]>(
+          productsQueryKey,
+          [...productsCached, addProductInCache],
+        )
       }
     },
   })
 
   async function handleCreateProduct(data: ProductFormData) {
-    const { categoryId, measure, name, quantity } = data
+    const { categoryId, measure, name, quantity, price } = data
 
     try {
       await createProductMutate({
@@ -67,6 +71,7 @@ export function ProductForm() {
         name,
         quantity,
         measure,
+        price,
       })
 
       toast.success('Produto cadastrado com sucesso')

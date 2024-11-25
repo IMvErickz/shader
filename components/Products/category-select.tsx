@@ -4,10 +4,14 @@ import { useFormContext } from 'react-hook-form'
 import { ProductFormData } from './RegisterModal'
 import { useQuery } from '@tanstack/react-query'
 import { getCategory } from '@/api/category/get-category'
+import { useParams } from 'next/navigation'
 
 export function CategorySelect() {
   const [category, setCategory] = useState('')
   const [label, setLabel] = useState('Selecione a Categoria')
+
+  const params = useParams()
+  const enterpriseId = String(params.id)
 
   const { setValue } = useFormContext<ProductFormData>()
 
@@ -17,8 +21,8 @@ export function CategorySelect() {
   }
 
   const { data } = useQuery({
-    queryKey: ['product-category'],
-    queryFn: getCategory,
+    queryKey: ['product-category', enterpriseId],
+    queryFn: () => getCategory({ enterpriseId }),
   })
 
   useEffect(() => {
@@ -41,19 +45,25 @@ export function CategorySelect() {
           sideOffset={5}
         >
           <div className="w-full flex flex-col gap-y-2 mb-2">
-            {data?.map((category) => {
-              return (
-                <button
-                  key={category.id}
-                  className="size-full flex justify-center gap-x-2 text-white"
-                  onClick={() =>
-                    handleChangeCategory(category.id, category.name)
-                  }
-                >
-                  {category.name}
-                </button>
-              )
-            })}
+            {data && data?.length < 1 ? (
+              <span className="text-white text-center">
+                Você ainda não tem categorias criadas
+              </span>
+            ) : (
+              data?.map((category) => {
+                return (
+                  <button
+                    key={category.id}
+                    className="size-full flex justify-center gap-x-2 text-white"
+                    onClick={() =>
+                      handleChangeCategory(category.id, category.name)
+                    }
+                  >
+                    {category.name}
+                  </button>
+                )
+              })
+            )}
           </div>
           <Popover.Arrow className="fill-zinc-800" />
         </Popover.Content>

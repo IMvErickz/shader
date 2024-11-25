@@ -29,6 +29,8 @@ export function ShowProductSection() {
                 name={product.name}
                 quantity={String(product.quantity)}
                 measure={product.measure}
+                price={product.price}
+                category={product.category.name}
               />
             )
           })}
@@ -43,6 +45,8 @@ export function ShowProductSection() {
                 name={product.name}
                 quantity={String(product.quantity)}
                 measure={product.measure}
+                price={product.price}
+                category={product.category.name}
               />
             )
           })}

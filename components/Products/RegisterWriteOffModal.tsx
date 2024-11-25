@@ -71,11 +71,13 @@ export function RegisterWriteOffModal({ id }: RegisterWriteOffModalProps) {
           id,
           name: filterProduct.name,
           quantity,
+          price: filterProduct.price,
           created_at: filterProduct.created_at,
           enterpriseId: filterProduct.enterpriseId,
           measure: filterProduct.measure,
           productCategoryId: filterProduct.productCategoryId,
           userId: filterProduct.userId,
+          category: filterProduct.category,
         }
 
         return queryClient.setQueryData<ProductResponse[]>(

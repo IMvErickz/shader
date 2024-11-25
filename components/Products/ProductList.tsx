@@ -7,9 +7,18 @@ interface ProductListProps {
   quantity: string
   measure: string
   id: string
+  price: number
+  category: string
 }
 
-export function ProductList({ measure, name, quantity, id }: ProductListProps) {
+export function ProductList({
+  measure,
+  name,
+  quantity,
+  id,
+  price,
+  category,
+}: ProductListProps) {
   const [measureType, setMeasureType] = useState('')
 
   function formatPrice(value: number) {
@@ -39,8 +48,10 @@ export function ProductList({ measure, name, quantity, id }: ProductListProps) {
       <div className="size-full flex flex-col items-center justify-center py-4">
         <span className="text-white text-xl">{name}</span>
         <span className="text-white text-xl font-semibold">
-          {formatPrice(30)}
+          {formatPrice(price)}
         </span>
+        <p className="text-white font-semibold">{`Lucro total: ${formatPrice(Number(quantity) * price)}`}</p>
+        <p className="text-white font-semibold">{`Categoria: ${category}`}</p>
       </div>
       <div className="w-full h-max flex items-center justify-between px-4 py-2 border-t border-t-zinc-500 border-t-solid">
         <p className="text-white font-semibold">{`Quantidade (${measureType}):`}</p>

@@ -8,7 +8,7 @@ export function SettingsAside() {
   const enterpriseId = String(params.id)
 
   return (
-    <aside className="h-full flex flex-col items-center justify-center gap-y-4 border-r border-r-solid border-r-zinc-400 px-4 mt-4">
+    <aside className="h-screen flex flex-col items-center justify-start gap-y-4 border-r border-r-solid border-r-zinc-400 px-4 mt-4">
       <NavLink
         href={`/enterprise/settings/${enterpriseId}`}
         className="text-white text-xl font-semibold"
@@ -20,6 +20,12 @@ export function SettingsAside() {
         className="text-white text-xl font-semibold"
       >
         Membros
+      </NavLink>
+      <NavLink
+        href={`/enterprise/settings/${enterpriseId}/category`}
+        className="text-white text-xl font-semibold"
+      >
+        Categorias
       </NavLink>
     </aside>
   )
