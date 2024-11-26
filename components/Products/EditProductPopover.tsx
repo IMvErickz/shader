@@ -3,6 +3,7 @@ import * as Popover from '@radix-ui/react-popover'
 import * as Separator from '@radix-ui/react-separator'
 import { Ellipsis, Pencil, Copy, Trash2 } from 'lucide-react'
 import { RegisterWriteOffModal } from './RegisterWriteOffModal'
+import { EditProductModal } from './edit-product-modal'
 
 interface EditProductPopover {
   productId: string
@@ -31,10 +32,12 @@ export function EditProductPopover({ productId }: EditProductPopover) {
             <Separator.Root className="bg-slate-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px" />
             <RegisterWriteOffModal id={productId} />
             <Separator.Root className="bg-slate-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px" />
-            <button className="size-full items-center flex justify-center gap-x-2 text-white px-4">
-              <Pencil className="w-4" />
-              Editar
-            </button>
+            <EditProductModal id={productId}>
+              <button className="size-full items-center flex justify-center gap-x-2 text-white px-4">
+                <Pencil className="w-4" />
+                Editar
+              </button>
+            </EditProductModal>
             <Separator.Root className="bg-slate-500 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px" />
             <button className="size-full items-center flex justify-center gap-x-2 text-white px-4">
               <Copy className="w-4" />

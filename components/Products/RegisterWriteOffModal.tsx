@@ -66,7 +66,7 @@ export function RegisterWriteOffModal({ id }: RegisterWriteOffModalProps) {
         (product) => product.id !== id,
       )
 
-      if (filterProduct && filterProductWithoutUpdated) {
+      if (filterProduct && filterProductWithoutUpdated && quantity) {
         const UpdateProductCached: ProductResponse = {
           id,
           name: filterProduct.name,

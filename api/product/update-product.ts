@@ -3,16 +3,25 @@ import { getToken } from '../get-token'
 
 interface UpdateProductProps {
   id: string
-  quantity: number
+  quantity?: number
+  name?: string
+  price?: number
 }
 
-export async function updateProduct({ id, quantity }: UpdateProductProps) {
+export async function updateProduct({
+  id,
+  quantity,
+  name,
+  price,
+}: UpdateProductProps) {
   const token = getToken()
 
   await api.put(
     `/product/${id}`,
     {
       quantity,
+      name,
+      price,
     },
     {
       headers: {
