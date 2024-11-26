@@ -21,7 +21,7 @@ interface RegisterModalProps {
 
 const formData = z.object({
   name: z.string().optional(),
-  price: z.number().optional(),
+  price: z.union([z.number(), z.nan()]).optional(),
   quantity: z.number().optional(),
 })
 
@@ -121,13 +121,15 @@ export function EditProductModal({ children, id }: RegisterModalProps) {
               className={input({ default: 'primary' })}
             />
             <input
-              type="text"
+              type="number"
               {...register('price', { valueAsNumber: true })}
+              step="0.01"
               className={input({ default: 'primary' })}
             />
             <input
-              type="text"
+              type="number"
               {...register('quantity', { valueAsNumber: true })}
+              step="0.01"
               className={input({ default: 'primary' })}
             />
             <Button type="submit">Enviar</Button>
