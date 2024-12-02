@@ -1,9 +1,9 @@
 'use client'
 
 import { User } from '@/@types/members/user'
-import { addUserInEnterprise } from '@/api/enterprise/add-user-in-enterprise'
-import { Team } from '@/api/enterprise/find-members'
-import { findUserByEmail } from '@/api/user/find-user-by-email'
+import { addUserInEnterprise } from '@/api-services/enterprise/add-user-in-enterprise'
+import { Team } from '@/api-services/enterprise/find-members'
+import { findUserByEmail } from '@/api-services/user/find-user-by-email'
 import { Button } from '@/components/button'
 import { queryClient } from '@/lib/query-client'
 import { input } from '@/theme/components/input'

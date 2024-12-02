@@ -1,6 +1,6 @@
 'use client'
 
-import { getEnterprises } from '@/api/enterprise/get-enterprises'
+import { getEnterprises } from '@/api-services/enterprise/get-enterprises'
 import { useQuery } from '@tanstack/react-query'
 import { parseCookies } from 'nookies'
 import { EnterpriseCard } from '../enterprise/enterprise-card'

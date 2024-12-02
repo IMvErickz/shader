@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from 'next/navigation'
 import { ProductCard } from './ProductCard'
 import { ProductList } from './ProductList'
 import { useQuery } from '@tanstack/react-query'
-import { getProductsByEnterpriseId } from '@/api/product/get-product-by-enterprise-id'
+import { getProductsByEnterpriseId } from '@/api-services/product/get-product-by-enterprise-id'
 
 export function ShowProductSection() {
   const searchParams = useSearchParams()

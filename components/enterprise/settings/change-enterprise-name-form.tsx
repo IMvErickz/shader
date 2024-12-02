@@ -1,7 +1,7 @@
 'use client'
 
-import { getEnterpriseById } from '@/api/enterprise/get-enterprise-by-id'
-import { updateEnterprise } from '@/api/enterprise/update-enterprise'
+import { getEnterpriseById } from '@/api-services/enterprise/get-enterprise-by-id'
+import { updateEnterprise } from '@/api-services/enterprise/update-enterprise'
 import { Button } from '@/components/button'
 import { input } from '@/theme/components/input'
 import { zodResolver } from '@hookform/resolvers/zod'

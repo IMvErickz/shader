@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { CategoryListItem } from './category-list-item'
-import { getCategory } from '@/api/category/get-category'
+import { getCategory } from '@/api-services/category/get-category'
 import { useParams } from 'next/navigation'
 
 export function CategoryList() {

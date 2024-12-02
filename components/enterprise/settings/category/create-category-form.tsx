@@ -1,7 +1,7 @@
 'use client'
 
 import { Category } from '@/@types/category/category'
-import { createCategory } from '@/api/category/create-category'
+import { createCategory } from '@/api-services/category/create-category'
 import { Button } from '@/components/button'
 import { queryClient } from '@/lib/query-client'
 import { input } from '@/theme/components/input'

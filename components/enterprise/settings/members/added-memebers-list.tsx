@@ -1,6 +1,6 @@
 'use client'
 
-import { findMembers } from '@/api/enterprise/find-members'
+import { findMembers } from '@/api-services/enterprise/find-members'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 

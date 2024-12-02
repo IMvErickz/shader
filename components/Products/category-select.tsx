@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { ProductFormData } from './RegisterModal'
 import { useQuery } from '@tanstack/react-query'
-import { getCategory } from '@/api/category/get-category'
+import { getCategory } from '@/api-services/category/get-category'
 import { useParams } from 'next/navigation'
 
 export function CategorySelect() {
