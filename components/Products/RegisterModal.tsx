@@ -16,6 +16,7 @@ const formData = z.object({
   quantity: z.number(),
   measure: z.string(),
   categoryId: z.string(),
+  barcode: z.string(),
 })
 
 export type ProductFormData = z.infer<typeof formData>

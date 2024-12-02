@@ -9,6 +9,7 @@ interface CreateProductProps {
   measure: string
   categoryId: string
   price: number
+  barcode: string
 }
 
 interface CreateProductResponse {
@@ -22,6 +23,7 @@ export async function createProduct({
   name,
   quantity,
   price,
+  barcode,
 }: CreateProductProps) {
   const token = getToken()
 
@@ -33,6 +35,7 @@ export async function createProduct({
       quantity,
       categoryId,
       price,
+      barcode,
     },
     {
       headers: {

@@ -78,6 +78,7 @@ export function RegisterWriteOffModal({ id }: RegisterWriteOffModalProps) {
           productCategoryId: filterProduct.productCategoryId,
           userId: filterProduct.userId,
           category: filterProduct.category,
+          barcode: filterProduct.barcode,
         }
 
         return queryClient.setQueryData<ProductResponse[]>(

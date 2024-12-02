@@ -7,6 +7,7 @@ export interface ProductResponse {
   created_at: string
   userId: string | null
   enterpriseId: string
+  barcode: string
   productCategoryId: string
   category: {
     name: string

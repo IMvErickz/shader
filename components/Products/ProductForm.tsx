@@ -35,6 +35,7 @@ export function ProductForm() {
       price,
       created_at: createdAt,
       category,
+      barcode,
     }) => {
       const productsCached =
         queryClient.getQueryData<ProductResponse[]>(productsQueryKey)
@@ -50,6 +51,7 @@ export function ProductForm() {
         userId,
         price,
         category,
+        barcode,
       }
 
       if (productsCached) {
@@ -62,7 +64,7 @@ export function ProductForm() {
   })
 
   async function handleCreateProduct(data: ProductFormData) {
-    const { categoryId, measure, name, quantity, price } = data
+    const { categoryId, measure, name, quantity, price, barcode } = data
 
     try {
       await createProductMutate({
@@ -72,6 +74,7 @@ export function ProductForm() {
         quantity,
         measure,
         price,
+        barcode,
       })
 
       toast.success('Produto cadastrado com sucesso')
@@ -87,6 +90,18 @@ export function ProductForm() {
     >
       <div className="w-full flex items-center justify-center gap-x-4">
         <div className="w-full flex flex-col">
+          <fieldset className="mb-[15px] flex flex-col items-center gap-5">
+            <label className="text-white text-xl" htmlFor="barcode">
+              Código de barras
+            </label>
+            <Controller
+              control={control}
+              name="barcode"
+              render={({ field }) => {
+                return <Input id="barcode" {...field} />
+              }}
+            />
+          </fieldset>
           <fieldset className="mb-[15px] flex flex-col items-center gap-5">
             <label className="text-white text-xl" htmlFor="name">
               Nome
@@ -120,15 +135,15 @@ export function ProductForm() {
               }}
             />
           </fieldset>
-          <fieldset className="mb-[15px] flex flex-col items-center gap-5">
-            <label className="text-white text-xl" htmlFor="quantity">
-              Tipo
-            </label>
-            <TypeMeasureSelect />
-          </fieldset>
         </div>
         <div className="w-full flex flex-col gap-y-6">
           <div className="flex flex-col gap-y-2 items-center justify-center">
+            <fieldset className="mb-[15px] w-full flex flex-col items-center gap-5">
+              <label className="text-white text-xl" htmlFor="quantity">
+                Tipo
+              </label>
+              <TypeMeasureSelect />
+            </fieldset>
             <label className="text-white text-xl" htmlFor="quantity">
               Quantidade
               {productMeasureType === Types.LITER && '(L)'}
